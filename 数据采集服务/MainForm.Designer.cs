@@ -40,6 +40,7 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripSplitButton();
             this.查看帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于服务器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.LocalPart = new System.Windows.Forms.ToolStripStatusLabel();
@@ -56,6 +57,7 @@
             this.服务器 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tcpClientConnectedEventArgsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.settingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -73,7 +75,9 @@
             this.toolStripButton3,
             this.toolStripSeparator2,
             this.settingForm,
-            this.toolStripButton4});
+            this.toolStripButton4,
+            this.toolStripButton5,
+            this.toolStripButton6});
             this.toolStrip1.Location = new System.Drawing.Point(4, 32);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(864, 31);
@@ -87,7 +91,7 @@
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton1.Text = "启动服务";
             this.toolStripButton1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -98,14 +102,14 @@
             this.toolStripButton2.Image = global::数据采集服务.Properties.Resources.stopcircle_fill;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton2.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton2.Text = "关闭服务";
             this.toolStripButton2.Click += new System.EventHandler(this.button2_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButton3
             // 
@@ -113,14 +117,14 @@
             this.toolStripButton3.Image = global::数据采集服务.Properties.Resources.folder_fill;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton3.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton3.Text = "打开数据文件夹";
             this.toolStripButton3.Click += new System.EventHandler(this.button3_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // settingForm
             // 
@@ -128,8 +132,8 @@
             this.settingForm.Image = global::数据采集服务.Properties.Resources.cog;
             this.settingForm.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.settingForm.Name = "settingForm";
-            this.settingForm.Size = new System.Drawing.Size(29, 28);
-            this.settingForm.Text = "settingForm";
+            this.settingForm.Size = new System.Drawing.Size(29, 24);
+            this.settingForm.Text = "配置";
             this.settingForm.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripButton4
@@ -142,7 +146,7 @@
             this.toolStripButton4.Image = global::数据采集服务.Properties.Resources.icon_bangzhuwendang;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(39, 28);
+            this.toolStripButton4.Size = new System.Drawing.Size(39, 24);
             this.toolStripButton4.Text = "帮助";
             // 
             // 查看帮助ToolStripMenuItem
@@ -158,6 +162,16 @@
             this.关于服务器ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.关于服务器ToolStripMenuItem.Text = "关于服务器";
             this.关于服务器ToolStripMenuItem.Click += new System.EventHandler(this.关于服务器ToolStripMenuItem_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = global::数据采集服务.Properties.Resources.数据;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton5.Text = "数据";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // statusStrip1
             // 
@@ -278,6 +292,16 @@
             // 
             this.settingsBindingSource.DataSource = typeof(数据采集服务.Settings);
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton6.Text = "可视化";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -330,6 +354,8 @@
         private System.Windows.Forms.BindingSource settingsBindingSource;
         private System.Windows.Forms.BindingSource tcpClientConnectedEventArgsBindingSource;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
     }
 }
 

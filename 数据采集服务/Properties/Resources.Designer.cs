@@ -143,6 +143,16 @@ namespace 数据采集服务.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 数据 {
+            get {
+                object obj = ResourceManager.GetObject("数据", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 新建_Microsoft_Visio_Drawing__2_ {
             get {
                 object obj = ResourceManager.GetObject("新建 Microsoft Visio Drawing (2)", resourceCulture);
