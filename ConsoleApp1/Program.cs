@@ -14,28 +14,31 @@ namespace ConsoleApp1
         {
             Console.ReadKey();
             Random m = new Random();
-            
+            TcpSocketClient client = new TcpSocketClient(IPAddress.Parse("127.0.0.1"), 8080);
+            client.Connect();
             while (true)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Data>>");
-                for (int i = 0; i < 100000; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     sb.Append(m.Next(1024).ToString());
                     sb.Append(" ");
                 }
                 sb.AppendLine();
 
-                TcpSocketClient client = new TcpSocketClient(IPAddress.Parse("127.0.0.1"), 22222);
-                client.Connect();
+                
                 for (int i = 0; i < 100; i++)
                 {
                     client.Send(Encoding.UTF8.GetBytes(sb.ToString()));
                 }
-                client.Close();
+
+                //client.Close();
+
                 Console.Write(""+ sb);
-                Thread.Sleep(2000);
+                Thread.Sleep(800);
             }
+            client.Close();
         }
     }
 }
