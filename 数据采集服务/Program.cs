@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace 数据采集服务
@@ -18,6 +17,5 @@ namespace 数据采集服务
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
-
     }
 }
