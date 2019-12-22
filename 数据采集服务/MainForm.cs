@@ -1,24 +1,20 @@
-﻿using Cowboy.Sockets;
+﻿using CCWin;
+using Cowboy.Sockets;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-using CCWin;
 
 namespace 数据采集服务
-{  
+{
     /// <summary>
     /// 主窗体采用CSkin第三方界面库的Mac主题
     /// </summary>
     public partial class MainForm : Skin_Mac
     {
+        #region 初始化变量
         /// <summary>
         /// 全局变量
         /// </summary>
@@ -26,7 +22,7 @@ namespace 数据采集服务
         List<IPEndPoint> session = new List<IPEndPoint>();
         private TcpSocketServer _server;
         public delegate void TcpConnect(TcpClientConnectedEventArgs e);
-        #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         public int port = 22222;
         string header = "y,m,d,h,m,s,x0,x1,x2,x3,x4,x5,x6,x7,x8,x9".Trim();
         string dir = Application.StartupPath + "\\Data";
@@ -47,9 +43,10 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+
         }
-        
+        #endregion
+
         #region 菜单
         /// <summary>
         /// 启动服务方法
@@ -59,7 +56,7 @@ namespace 数据采集服务
         private void button1_Click(object sender, EventArgs e)
         {
             Log("启动服务");
-            
+
             StartServer(port);
             toolStripButton2.Enabled = true;
             toolStripButton1.Enabled = false;
@@ -149,25 +146,19 @@ namespace 数据采集服务
         void server_ClientConnected(object sender, TcpClientConnectedEventArgs e)
         {
             Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 接入服务器"));
-            if(!session.Contains(e.Session.RemoteEndPoint))
+            if (!session.Contains(e.Session.RemoteEndPoint))
             {
                 session.Add(e.Session.RemoteEndPoint);
             }
             TcpConnect connect = new TcpConnect(Func);
-            //connect.Invoke(e);
-            ch = new ColumnHeader();
-            listView1.Columns.Add("IP", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("Port", 120, HorizontalAlignment.Left);
-            listView1.Items.Add("1");
-
-            toolStripStatusLabel1.Text = "已连接"+e.Session.RemoteEndPoint;
+            toolStripStatusLabel1.Text = "已连接" + e.Session.RemoteEndPoint;
             RemotePort.Text = "远程终结点为：" + e.Session.RemoteEndPoint.Port.ToString();
-            LocalPart.Text = "本地终结点"+e.Session.LocalEndPoint.Port.ToString();
-            LocalEndPointAddress.Text = "本地端口号："+e.Session.LocalEndPoint.Address.ToString();
-        }   
+            LocalPart.Text = "本地终结点" + e.Session.LocalEndPoint.Port.ToString();
+            LocalEndPointAddress.Text = "本地端口号：" + e.Session.LocalEndPoint.Address.ToString();
+        }
         private void Func(TcpClientConnectedEventArgs e)
         {
-            
+
         }
         /// <summary>
         /// 服务端与客户端连接断开方法
@@ -186,11 +177,11 @@ namespace 数据采集服务
         /// <param name="e"></param>
         void server_ClientDataReceived(object sender, TcpClientDataReceivedEventArgs e)
         {
-            
+
             Log(e.Session.RemoteEndPoint.Address + ">> 收到" + e.DataLength + "字节数据");
             string filepath = GetDataFilePath(e.Session.RemoteEndPoint.Address);
             WriteData(filepath, e.Data, e.DataOffset, e.DataLength);
-            DataLength.Text = "实时接收数据的量:"+e.DataLength.ToString();
+            DataLength.Text = "实时接收数据的量:" + e.DataLength.ToString();
             DataSum += e.DataLength;
             AllDataLength.Text = "接受数据的总量为：" + DataSum.ToString();
         }
@@ -212,8 +203,8 @@ namespace 数据采集服务
                 if (NeedWriteHeader)
                 {
                     //string header = this.toolStripTextBox2.Text.Trim();
-                    byte[] buffer = Encoding.Default.GetBytes(header+"\r\n");
-                    fs.Write(buffer,0,buffer.Length);
+                    byte[] buffer = Encoding.Default.GetBytes(header + "\r\n");
+                    fs.Write(buffer, 0, buffer.Length);
                 }
                 fs.Write(data, dataOffset, dataLength);
             }
@@ -259,16 +250,10 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            IpAdress.Text = "已有以下已连接，共"+session.Count.ToString()+"个\n";
+            IpAdress.Text = "已有以下已连接，共" + session.Count.ToString() + "个\n";
             foreach (var item in session)
             {
                 IpAdress.Text += item;
-            }
-            this.listView1.BeginUpdate();
-            foreach (var item in session)
-            {
-                ListViewItem lvi = new ListViewItem();
-                //lvi.Text = 
             }
         }
         #endregion
@@ -335,7 +320,7 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void Status_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.Show("显示接受字节数量",Status);
+            toolTip1.Show("显示接受字节数量", Status);
         }
         /// <summary>
         /// 显示连接状态
@@ -360,17 +345,5 @@ namespace 数据采集服务
         }
 
         #endregion
-
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            DataForm dataForm = new DataForm();
-            dataForm.ShowDialog();
-        }
-
-        private void toolStripButton6_Click(object sender, EventArgs e)
-        {
-            MatPlotForm matPlotForm = new MatPlotForm();
-            matPlotForm.ShowDialog();
-        }
     }
 }
