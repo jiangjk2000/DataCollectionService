@@ -54,8 +54,8 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.IpAdress = new System.Windows.Forms.Label();
             this.服务器 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.tcpClientConnectedEventArgsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.tcpClientConnectedEventArgsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.settingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -279,15 +279,15 @@
             this.服务器.Visible = true;
             this.服务器.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.服务器_MouseDoubleClick);
             // 
-            // tcpClientConnectedEventArgsBindingSource
-            // 
-            this.tcpClientConnectedEventArgsBindingSource.DataSource = typeof(Cowboy.Sockets.TcpClientConnectedEventArgs);
-            // 
             // timer2
             // 
             this.timer2.Enabled = true;
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // tcpClientConnectedEventArgsBindingSource
+            // 
+            this.tcpClientConnectedEventArgsBindingSource.DataSource = typeof(Cowboy.Sockets.TcpClientConnectedEventArgs);
             // 
             // settingsBindingSource
             // 
