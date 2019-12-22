@@ -20,7 +20,7 @@ namespace ConsoleApp1
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Data>>");
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     sb.Append(m.Next(1024).ToString());
                     sb.Append(" ");
