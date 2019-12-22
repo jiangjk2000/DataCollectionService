@@ -168,7 +168,7 @@ namespace 数据采集服务
             if(!session.Contains(e.Session.RemoteEndPoint))
             {
                 session.Add(e.Session.RemoteEndPoint);
-                this.listView1.Items.Clear();
+               
                 IfAdd = true;
             }
             toolStripStatusLabel1.Text = "已连接";
@@ -181,7 +181,7 @@ namespace 数据采集服务
         void server_ClientDisconnected(object sender, TcpClientDisconnectedEventArgs e)
         {
             session.Remove(e.Session.RemoteEndPoint);
-            //listView1.Items.Remove();   //按项移除
+            
             IfAdd = true;
             if (session.Count == 0)
             {
@@ -277,8 +277,9 @@ namespace 数据采集服务
             IpAdress.Text = "已有以下已连接，共" + session.Count.ToString() + "个\n" + x;
             if (IfAdd)
             {
+                this.listView1.Items.Clear();
                 update_session();
-
+                
             }
             IfAdd = false;
         }
