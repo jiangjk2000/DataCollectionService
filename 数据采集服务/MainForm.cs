@@ -1,19 +1,14 @@
-﻿using Cowboy.Sockets;
+﻿using CCWin;
+using Cowboy.Sockets;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-using CCWin;
 
 namespace 数据采集服务
-{  
+{
     /// <summary>
     /// 主窗体采用CSkin第三方界面库的Mac主题
     /// </summary>
@@ -28,11 +23,11 @@ namespace 数据采集服务
         List<double> list = new List<double>();
         private TcpSocketServer _server;
         public delegate void TcpConnect(TcpClientConnectedEventArgs e);
-        #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         public int port = 22222;
         string header = "y,m,d,h,m,s,x0,x1,x2,x3,x4,x5,x6,x7,x8,x9".Trim();
         string dir = Application.StartupPath + "\\Data";
-        ColumnHeader ch;
+
         bool IfAdd = false;
         /// <summary>
         /// 默认窗体初始化
@@ -49,11 +44,22 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ch = new ColumnHeader();
+            int headerlength = header.Split(',').Length;
+            ColumnHeader[] column = new ColumnHeader[headerlength];
+
+            for (int i = 0; i < headerlength; i++)
+            {
+                column[i] = new ColumnHeader();
+                column[i].Text = (header.Split(','))[i];
+                column[i].Width = 60;
+                column[i].TextAlign = HorizontalAlignment.Center;
+            }
+            this.listView2.Columns.AddRange(column);
+
             listView1.Columns.Add("IP", 120, HorizontalAlignment.Left);
             listView1.Columns.Add("Port", 120, HorizontalAlignment.Left);
         }
-        public void update_session()
+        public void Update_session()
         {
             this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度
 
@@ -78,7 +84,7 @@ namespace 数据采集服务
         private void button1_Click(object sender, EventArgs e)
         {
             Log("启动服务");
-            
+
             StartServer(port);
             toolStripButton2.Enabled = true;
             toolStripButton1.Enabled = false;
@@ -168,14 +174,14 @@ namespace 数据采集服务
         void server_ClientConnected(object sender, TcpClientConnectedEventArgs e)
         {
             Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 接入服务器"));
-            if(!session.Contains(e.Session.RemoteEndPoint))
+            if (!session.Contains(e.Session.RemoteEndPoint))
             {
                 session.Add(e.Session.RemoteEndPoint);
                 this.listView1.Items.Clear();
                 IfAdd = true;
             }
             toolStripStatusLabel1.Text = "已连接";
-        }   
+        }
         /// <summary>
         /// 服务端与客户端连接断开方法
         /// </summary>
@@ -199,16 +205,33 @@ namespace 数据采集服务
         /// <param name="e"></param>
         void server_ClientDataReceived(object sender, TcpClientDataReceivedEventArgs e)
         {
-            
+
             Log(e.Session.RemoteEndPoint.Address + ">> 收到" + e.DataLength + "字节数据");
             string filepath = GetDataFilePath(e.Session.RemoteEndPoint.Address);
             WriteData(filepath, e.Data, e.DataOffset, e.DataLength);
             UpdateGraph(e.Data, e.DataOffset, e.DataLength);
-            DataLength.Text = "实时接收数据的量:"+e.DataLength.ToString() + " bytes";
+            UpdateListView2(RealDataReceive(e.Data, e.DataOffset, e.DataLength));
+            DataLength.Text = "实时接收数据的量:" + e.DataLength.ToString() + " bytes";
             DataSum += e.DataLength;
             AllDataLength.Text = "接受数据的总量为：" + DataSum.ToString() + " bytes";
             list.Add(e.DataLength);
         }
+
+        private void UpdateListView2(int[] intvalues)
+        {
+            this.listView2.BeginUpdate();
+            ListViewItem.ListViewSubItem[] subItem = new ListViewItem.ListViewSubItem[intvalues.Length];
+            for (int i = 0; i < intvalues.Length; i++)
+            {
+                subItem[i] = new ListViewItem.ListViewSubItem();
+                subItem[i].Text = intvalues[i].ToString();
+            }
+            ListViewItem lvi = new ListViewItem();
+            lvi.SubItems.AddRange(subItem);
+            this.listView2.Items.Add(lvi);
+            this.listView2.EndUpdate();
+        }
+
         /// <summary>
         /// 数据接收
         /// </summary>
@@ -227,8 +250,8 @@ namespace 数据采集服务
                 if (NeedWriteHeader)
                 {
                     //string header = this.toolStripTextBox2.Text.Trim();
-                    byte[] buffer = Encoding.Default.GetBytes(header+"\r\n");
-                    fs.Write(buffer,0,buffer.Length);
+                    byte[] buffer = Encoding.Default.GetBytes(header + "\r\n");
+                    fs.Write(buffer, 0, buffer.Length);
                 }
                 fs.Write(data, dataOffset, dataLength);
             }
@@ -278,10 +301,9 @@ namespace 数据采集服务
                 x += item;
                 x += "\n";
             }
-            IpAdress.Text = "已有以下已连接，共" + session.Count.ToString() + "个\n" + x;
             if (IfAdd)
             {
-                update_session();
+                Update_session();
 
             }
             IfAdd = false;
@@ -361,17 +383,13 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void Status_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.Show("显示接受字节数量",Status);
+            toolTip1.Show("显示接受字节数量", Status);
         }
         /// <summary>
         /// 显示连接状态
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void IpAdress_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.Show("显示连接状态", IpAdress);
-        }
         #endregion
 
         #region 后台最小化
@@ -412,17 +430,6 @@ namespace 数据采集服务
 
         #region ZedGraph窗口
         /// <summary>
-        /// 打开窗口Button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripButton6_Click(object sender, EventArgs e)
-        {
-            MatPlotForm matPlotForm = new MatPlotForm();
-            //matPlotForm.SetFormIntValue += UpdateGraph();
-            matPlotForm.ShowDialog();
-        }
-        /// <summary>
         /// 更新图像
         /// </summary>
         /// <param name="data"></param>
@@ -434,9 +441,9 @@ namespace 数据采集服务
 
         }
         public int[] realdata;
-        private static void RealDataReceive(byte[] data, int dataOffset, int dataLength)
+        private static int[] RealDataReceive(byte[] data, int dataOffset, int dataLength)
         {
-            int[] realdatatemp;
+            int[] realdatatemp = null;
             string str = System.Text.Encoding.UTF8.GetString(data, dataOffset + 1, dataLength - 1);
             if (str.StartsWith("Data>>") && str.EndsWith("\r\n"))
             {
@@ -449,7 +456,32 @@ namespace 数据采集服务
                 }
             }
             //MainForm.realdata = realdatatemp;
+            return realdatatemp;
         }
         #endregion
+    }
+    /// <summary>
+    /// 双缓冲ListView
+    /// </summary>
+    public class ListViewNF : System.Windows.Forms.ListView
+    {
+        public ListViewNF()
+        {
+            // 开启双缓冲
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+
+            // Enable the OnNotifyMessage event so we get a chance to filter out 
+            // Windows messages before they get to the form's WndProc
+            this.SetStyle(ControlStyles.EnableNotifyMessage, true);
+        }
+
+        protected override void OnNotifyMessage(Message m)
+        {
+            //Filter out the WM_ERASEBKGND message
+            if (m.Msg != 0x14)
+            {
+                base.OnNotifyMessage(m);
+            }
+        }
     }
 }

@@ -28,40 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("实时数据");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("节点1");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("节点4");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("节点5");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("节点6");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("历史数据", new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3,
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("文件1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("文件2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("实时数据", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("文件1");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("文件2");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("文件3");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("文件4");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("历史数据", new System.Windows.Forms.TreeNode[] {
             treeNode4,
-            treeNode5});
+            treeNode5,
+            treeNode6,
+            treeNode7});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataForm));
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView1 = new ListViewNF();
             this.SuspendLayout();
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(4, 32);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "实时";
-            treeNode1.Text = "实时数据";
-            treeNode2.Name = "节点1";
-            treeNode2.Text = "节点1";
-            treeNode3.Name = "节点4";
-            treeNode3.Text = "节点4";
-            treeNode4.Name = "节点5";
-            treeNode4.Text = "节点5";
-            treeNode5.Name = "节点6";
-            treeNode5.Text = "节点6";
-            treeNode6.Name = "历史数据";
-            treeNode6.Text = "历史数据";
+            treeNode1.Name = "节点4";
+            treeNode1.Text = "文件1";
+            treeNode2.Name = "节点5";
+            treeNode2.Text = "文件2";
+            treeNode3.Name = "节点3";
+            treeNode3.Text = "实时数据";
+            treeNode4.Name = "Fold1";
+            treeNode4.Text = "文件1";
+            treeNode5.Name = "节点4";
+            treeNode5.Text = "文件2";
+            treeNode6.Name = "节点5";
+            treeNode6.Text = "文件3";
+            treeNode7.Name = "节点6";
+            treeNode7.Text = "文件4";
+            treeNode8.Name = "历史数据";
+            treeNode8.Text = "历史数据";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode6});
+            treeNode3,
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(121, 414);
             this.treeView1.TabIndex = 0;
             // 
@@ -95,6 +103,7 @@
         #endregion
 
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.ListView listView1;
+        
+        ListViewNF listView1;
     }
 }

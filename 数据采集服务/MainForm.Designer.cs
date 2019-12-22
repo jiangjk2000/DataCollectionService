@@ -41,7 +41,6 @@
             this.查看帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于服务器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.DataLength = new System.Windows.Forms.ToolStripStatusLabel();
@@ -49,17 +48,26 @@
             this.speed = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.Status = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.IpAdress = new System.Windows.Forms.Label();
+            this.listView1 = new ListViewNF();
             this.服务器 = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Status = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listView2 = new ListViewNF();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.tcpClientConnectedEventArgsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.settingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tcpClientConnectedEventArgsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -75,8 +83,7 @@
             this.toolStripSeparator2,
             this.settingForm,
             this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripButton6});
+            this.toolStripButton5});
             this.toolStrip1.Location = new System.Drawing.Point(4, 32);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(864, 27);
@@ -172,16 +179,6 @@
             this.toolStripButton5.Text = "数据";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(29, 24);
-            this.toolStripButton6.Text = "可视化";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -225,22 +222,10 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Status
-            // 
-            this.Status.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Status.Location = new System.Drawing.Point(4, 59);
-            this.Status.Multiline = true;
-            this.Status.Name = "Status";
-            this.Status.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.Status.Size = new System.Drawing.Size(500, 449);
-            this.Status.TabIndex = 1;
-            this.Status.MouseHover += new System.EventHandler(this.Status_MouseHover);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listView1);
-            this.groupBox1.Controls.Add(this.IpAdress);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox1.Location = new System.Drawing.Point(504, 59);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(364, 449);
@@ -250,27 +235,16 @@
             // 
             // listView1
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Right;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 137);
+            this.listView1.Location = new System.Drawing.Point(3, 21);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(358, 309);
+            this.listView1.Size = new System.Drawing.Size(358, 425);
             this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // IpAdress
-            // 
-            this.IpAdress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.IpAdress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.IpAdress.Location = new System.Drawing.Point(3, 21);
-            this.IpAdress.Name = "IpAdress";
-            this.IpAdress.Size = new System.Drawing.Size(358, 116);
-            this.IpAdress.TabIndex = 8;
-            this.IpAdress.Text = "未有IP连接";
-            this.IpAdress.MouseHover += new System.EventHandler(this.IpAdress_MouseHover);
             // 
             // 服务器
             // 
@@ -285,6 +259,88 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(4, 59);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(500, 449);
+            this.tabControl1.TabIndex = 8;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.Status);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(492, 420);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "接收状态";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // Status
+            // 
+            this.Status.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Status.Location = new System.Drawing.Point(3, 3);
+            this.Status.Multiline = true;
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(486, 414);
+            this.Status.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.listView2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(492, 420);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "实时数据";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listView2
+            // 
+            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView2.GridLines = true;
+            this.listView2.HideSelection = false;
+            this.listView2.Location = new System.Drawing.Point(3, 3);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(486, 414);
+            this.listView2.TabIndex = 0;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.zedGraphControl1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(492, 416);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "数据可视化";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl1
+            // 
+            this.zedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zedGraphControl1.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.zedGraphControl1.Name = "zedGraphControl1";
+            this.zedGraphControl1.ScrollGrace = 0D;
+            this.zedGraphControl1.ScrollMaxX = 0D;
+            this.zedGraphControl1.ScrollMaxY = 0D;
+            this.zedGraphControl1.ScrollMaxY2 = 0D;
+            this.zedGraphControl1.ScrollMinX = 0D;
+            this.zedGraphControl1.ScrollMinY = 0D;
+            this.zedGraphControl1.ScrollMinY2 = 0D;
+            this.zedGraphControl1.Size = new System.Drawing.Size(492, 416);
+            this.zedGraphControl1.TabIndex = 0;
+            this.zedGraphControl1.UseExtendedPrintDialog = true;
+            // 
             // tcpClientConnectedEventArgsBindingSource
             // 
             this.tcpClientConnectedEventArgsBindingSource.DataSource = typeof(Cowboy.Sockets.TcpClientConnectedEventArgs);
@@ -298,8 +354,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(872, 538);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Status);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -312,6 +368,11 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tcpClientConnectedEventArgsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -331,9 +392,7 @@
         private System.Windows.Forms.ToolStripStatusLabel AllDataLength;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TextBox Status;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label IpAdress;
         private System.Windows.Forms.ToolStripSplitButton toolStripButton4;
         private System.Windows.Forms.ToolStripMenuItem 查看帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关于服务器ToolStripMenuItem;
@@ -342,11 +401,17 @@
         private System.Windows.Forms.ToolStripButton settingForm;
         private System.Windows.Forms.BindingSource settingsBindingSource;
         private System.Windows.Forms.BindingSource tcpClientConnectedEventArgsBindingSource;
-        private System.Windows.Forms.ListView listView1;
+        ListViewNF listView1;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.ToolStripStatusLabel speed;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox Status;
+        private System.Windows.Forms.TabPage tabPage2;
+        ListViewNF listView2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private ZedGraph.ZedGraphControl zedGraphControl1;
     }
 }
 
