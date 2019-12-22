@@ -11,11 +11,17 @@ using CCWin;
 
 namespace 数据采集服务
 {
+    public delegate void setIntArrayValue(int[] Value);
     public partial class MatPlotForm : Skin_Mac
     {
         public MatPlotForm()
         {
             InitializeComponent();
+        }
+        public event setIntArrayValue SetFormIntValue;
+        private void MatPlotForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

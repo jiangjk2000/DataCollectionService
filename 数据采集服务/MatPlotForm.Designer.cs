@@ -59,6 +59,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MatPlotForm";
             this.Text = "数据可视化";
+            this.Load += new System.EventHandler(this.MatPlotForm_Load);
             this.ResumeLayout(false);
 
         }

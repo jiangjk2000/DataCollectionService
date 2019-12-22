@@ -203,6 +203,7 @@ namespace 数据采集服务
             Log(e.Session.RemoteEndPoint.Address + ">> 收到" + e.DataLength + "字节数据");
             string filepath = GetDataFilePath(e.Session.RemoteEndPoint.Address);
             WriteData(filepath, e.Data, e.DataOffset, e.DataLength);
+            UpdateGraph(e.Data, e.DataOffset, e.DataLength);
             DataLength.Text = "实时接收数据的量:"+e.DataLength.ToString() + " bytes";
             DataSum += e.DataLength;
             AllDataLength.Text = "接受数据的总量为：" + DataSum.ToString() + " bytes";
@@ -417,7 +418,35 @@ namespace 数据采集服务
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             MatPlotForm matPlotForm = new MatPlotForm();
+            //matPlotForm.SetFormIntValue += UpdateGraph();
             matPlotForm.ShowDialog();
+        }
+        /// <summary>
+        /// 更新图像
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="dataOffset"></param>
+        /// <param name="dataLength"></param>
+        private void UpdateGraph(byte[] data, int dataOffset, int dataLength)
+        {
+            RealDataReceive(data, dataOffset, dataLength);
+
+        }
+
+        private static void RealDataReceive(byte[] data, int dataOffset, int dataLength)
+        {
+            string str = System.Text.Encoding.UTF8.GetString(data, dataOffset + 1, dataLength - 1);
+            int[] realdata;
+            if (str.StartsWith("Data>>") && str.EndsWith("\r\n"))
+            {
+                string[] databox = str.Split('#');
+                string[] strdata = databox[1].Split(',');
+                realdata = new int[strdata.Length];
+                for (int i = 0; i < strdata.Length; i++)
+                {
+                    realdata[i] = int.Parse(strdata[i]);
+                }
+            }
         }
         #endregion
     }
