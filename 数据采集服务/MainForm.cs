@@ -25,6 +25,7 @@ namespace 数据采集服务
         double DataSum = 0;
         List<IPEndPoint> session = new List<IPEndPoint>();
         private TcpSocketServer _server;
+        public delegate void TcpConnect(TcpClientConnectedEventArgs e);
         #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         public int port = 22222;
         string header = "y,m,d,h,m,s,x0,x1,x2,x3,x4,x5,x6,x7,x8,x9".Trim();
@@ -46,9 +47,7 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ch = new ColumnHeader();
-            listView1.Columns.Add("IP", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("Port", 120, HorizontalAlignment.Left);
+            
         }
         
         #region 菜单
@@ -154,11 +153,22 @@ namespace 数据采集服务
             {
                 session.Add(e.Session.RemoteEndPoint);
             }
+            TcpConnect connect = new TcpConnect(Func);
+            //connect.Invoke(e);
+            ch = new ColumnHeader();
+            listView1.Columns.Add("IP", 120, HorizontalAlignment.Left);
+            listView1.Columns.Add("Port", 120, HorizontalAlignment.Left);
+            listView1.Items.Add("1");
+
             toolStripStatusLabel1.Text = "已连接"+e.Session.RemoteEndPoint;
             RemotePort.Text = "远程终结点为：" + e.Session.RemoteEndPoint.Port.ToString();
             LocalPart.Text = "本地终结点"+e.Session.LocalEndPoint.Port.ToString();
             LocalEndPointAddress.Text = "本地端口号："+e.Session.LocalEndPoint.Address.ToString();
         }   
+        private void Func(TcpClientConnectedEventArgs e)
+        {
+            
+        }
         /// <summary>
         /// 服务端与客户端连接断开方法
         /// </summary>

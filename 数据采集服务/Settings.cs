@@ -11,14 +11,26 @@ using CCWin;
 
 namespace 数据采集服务
 {
+    /// <summary>
+    /// 建立传值委托
+    /// </summary>
+    /// <param name="textValue"></param>
     public delegate void setTextValue(string textValue);
-
+    /// <summary>
+    /// 设置界面的窗体类
+    /// </summary>
     public partial class Settings : Skin_Mac
     {
+        /// <summary>
+        /// Settings构造器
+        /// </summary>
         public Settings()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// 建立传值事件
+        /// </summary>
         public event setTextValue SetFormTextValue;
 
         private void settingYes_Click(object sender, EventArgs e)

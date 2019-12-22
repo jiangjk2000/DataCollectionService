@@ -14,7 +14,7 @@ namespace ConsoleApp1
         {
             Console.ReadKey();
             Random m = new Random();
-            TcpSocketClient client = new TcpSocketClient(IPAddress.Parse("127.0.0.1"), 8080);
+            TcpSocketClient client = new TcpSocketClient(IPAddress.Parse("127.0.0.1"), 22222);
             client.Connect();
             while (true)
             {
