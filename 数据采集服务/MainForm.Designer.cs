@@ -86,7 +86,7 @@
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::数据采集服务.Properties.Resources.playcircle_fill;
+            this.toolStripButton1.Image = global::数据采集服务.Properties.Resources.Start;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -98,7 +98,7 @@
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton2.Enabled = false;
-            this.toolStripButton2.Image = global::数据采集服务.Properties.Resources.stopcircle_fill;
+            this.toolStripButton2.Image = global::数据采集服务.Properties.Resources.Stop;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(29, 24);
@@ -113,7 +113,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::数据采集服务.Properties.Resources.folder_fill;
+            this.toolStripButton3.Image = global::数据采集服务.Properties.Resources.Folder;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(29, 24);
@@ -128,7 +128,7 @@
             // settingForm
             // 
             this.settingForm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.settingForm.Image = global::数据采集服务.Properties.Resources.cog;
+            this.settingForm.Image = global::数据采集服务.Properties.Resources.Settings;
             this.settingForm.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.settingForm.Name = "settingForm";
             this.settingForm.Size = new System.Drawing.Size(29, 24);
@@ -142,7 +142,7 @@
             this.toolStripButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.查看帮助ToolStripMenuItem,
             this.关于服务器ToolStripMenuItem});
-            this.toolStripButton4.Image = global::数据采集服务.Properties.Resources.icon_bangzhuwendang;
+            this.toolStripButton4.Image = global::数据采集服务.Properties.Resources.Help;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(39, 24);
@@ -165,7 +165,7 @@
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::数据采集服务.Properties.Resources.数据;
+            this.toolStripButton5.Image = global::数据采集服务.Properties.Resources.Data;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(29, 24);
