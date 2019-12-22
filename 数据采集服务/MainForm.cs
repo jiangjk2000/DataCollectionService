@@ -407,6 +407,7 @@ namespace 数据采集服务
             DataForm dataForm = new DataForm();
             dataForm.ShowDialog();
         }
+
         #endregion
 
         #region ZedGraph窗口
@@ -432,21 +433,22 @@ namespace 数据采集服务
             RealDataReceive(data, dataOffset, dataLength);
 
         }
-
+        public int[] realdata;
         private static void RealDataReceive(byte[] data, int dataOffset, int dataLength)
         {
+            int[] realdatatemp;
             string str = System.Text.Encoding.UTF8.GetString(data, dataOffset + 1, dataLength - 1);
-            int[] realdata;
             if (str.StartsWith("Data>>") && str.EndsWith("\r\n"))
             {
                 string[] databox = str.Split('#');
                 string[] strdata = databox[1].Split(',');
-                realdata = new int[strdata.Length];
+                realdatatemp = new int[strdata.Length];
                 for (int i = 0; i < strdata.Length; i++)
                 {
-                    realdata[i] = int.Parse(strdata[i]);
+                    realdatatemp[i] = int.Parse(strdata[i]);
                 }
             }
+            //MainForm.realdata = realdatatemp;
         }
         #endregion
     }
