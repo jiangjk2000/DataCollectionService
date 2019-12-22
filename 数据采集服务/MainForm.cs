@@ -19,6 +19,7 @@ namespace 数据采集服务
     /// </summary>
     public partial class MainForm : Skin_Mac
     {
+        #region 初始化
         /// <summary>
         /// 全局变量
         /// </summary>
@@ -66,6 +67,8 @@ namespace 数据采集服务
 
             this.listView1.EndUpdate();  //结束数据处理，UI界面一次性绘制。
         }
+        #endregion
+
         #region 菜单
         /// <summary>
         /// 启动服务方法
@@ -200,9 +203,9 @@ namespace 数据采集服务
             Log(e.Session.RemoteEndPoint.Address + ">> 收到" + e.DataLength + "字节数据");
             string filepath = GetDataFilePath(e.Session.RemoteEndPoint.Address);
             WriteData(filepath, e.Data, e.DataOffset, e.DataLength);
-            DataLength.Text = "实时接收数据的量:"+e.DataLength.ToString();
+            DataLength.Text = "实时接收数据的量:"+e.DataLength.ToString() + " bytes";
             DataSum += e.DataLength;
-            AllDataLength.Text = "接受数据的总量为：" + DataSum.ToString();
+            AllDataLength.Text = "接受数据的总量为：" + DataSum.ToString() + " bytes";
             list.Add(e.DataLength);
         }
         /// <summary>

@@ -46,6 +46,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.DataLength = new System.Windows.Forms.ToolStripStatusLabel();
             this.AllDataLength = new System.Windows.Forms.ToolStripStatusLabel();
+            this.speed = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Status = new System.Windows.Forms.TextBox();
@@ -55,7 +56,6 @@
             this.服务器 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tcpClientConnectedEventArgsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.speed = new System.Windows.Forms.ToolStripStatusLabel();
             this.settingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -214,6 +214,12 @@
             this.AllDataLength.Size = new System.Drawing.Size(129, 20);
             this.AllDataLength.Text = "接收数据的总量：";
             // 
+            // speed
+            // 
+            this.speed.Name = "speed";
+            this.speed.Size = new System.Drawing.Size(84, 20);
+            this.speed.Text = "传输速度：";
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -282,12 +288,6 @@
             this.timer2.Enabled = true;
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // speed
-            // 
-            this.speed.Name = "speed";
-            this.speed.Size = new System.Drawing.Size(84, 20);
-            this.speed.Text = "传输速度：";
             // 
             // settingsBindingSource
             // 
