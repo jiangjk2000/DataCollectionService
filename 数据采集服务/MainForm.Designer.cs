@@ -41,13 +41,11 @@
             this.查看帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于服务器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.LocalPart = new System.Windows.Forms.ToolStripStatusLabel();
-            this.RemotePort = new System.Windows.Forms.ToolStripStatusLabel();
             this.DataLength = new System.Windows.Forms.ToolStripStatusLabel();
             this.AllDataLength = new System.Windows.Forms.ToolStripStatusLabel();
-            this.LocalEndPointAddress = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Status = new System.Windows.Forms.TextBox();
@@ -56,8 +54,9 @@
             this.IpAdress = new System.Windows.Forms.Label();
             this.服务器 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tcpClientConnectedEventArgsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.speed = new System.Windows.Forms.ToolStripStatusLabel();
             this.settingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -80,7 +79,7 @@
             this.toolStripButton6});
             this.toolStrip1.Location = new System.Drawing.Point(4, 32);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(864, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(864, 27);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -173,16 +172,24 @@
             this.toolStripButton5.Text = "数据";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton6.Text = "可视化";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.LocalPart,
-            this.RemotePort,
             this.DataLength,
             this.AllDataLength,
-            this.LocalEndPointAddress});
+            this.speed});
             this.statusStrip1.Location = new System.Drawing.Point(4, 508);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(864, 26);
@@ -194,18 +201,6 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 20);
             this.toolStripStatusLabel1.Text = "就绪";
-            // 
-            // LocalPart
-            // 
-            this.LocalPart.Name = "LocalPart";
-            this.LocalPart.Size = new System.Drawing.Size(99, 20);
-            this.LocalPart.Text = "本地终结点：";
-            // 
-            // RemotePort
-            // 
-            this.RemotePort.Name = "RemotePort";
-            this.RemotePort.Size = new System.Drawing.Size(99, 20);
-            this.RemotePort.Text = "远程终结点：";
             // 
             // DataLength
             // 
@@ -219,12 +214,6 @@
             this.AllDataLength.Size = new System.Drawing.Size(129, 20);
             this.AllDataLength.Text = "接收数据的总量：";
             // 
-            // LocalEndPointAddress
-            // 
-            this.LocalEndPointAddress.Name = "LocalEndPointAddress";
-            this.LocalEndPointAddress.Size = new System.Drawing.Size(99, 20);
-            this.LocalEndPointAddress.Text = "本地端口号：";
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -233,11 +222,11 @@
             // Status
             // 
             this.Status.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Status.Location = new System.Drawing.Point(4, 63);
+            this.Status.Location = new System.Drawing.Point(4, 59);
             this.Status.Multiline = true;
             this.Status.Name = "Status";
             this.Status.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.Status.Size = new System.Drawing.Size(500, 445);
+            this.Status.Size = new System.Drawing.Size(500, 449);
             this.Status.TabIndex = 1;
             this.Status.MouseHover += new System.EventHandler(this.Status_MouseHover);
             // 
@@ -246,9 +235,9 @@
             this.groupBox1.Controls.Add(this.listView1);
             this.groupBox1.Controls.Add(this.IpAdress);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(504, 63);
+            this.groupBox1.Location = new System.Drawing.Point(504, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(364, 445);
+            this.groupBox1.Size = new System.Drawing.Size(364, 449);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "连接状态：";
@@ -260,7 +249,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 137);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(358, 305);
+            this.listView1.Size = new System.Drawing.Size(358, 309);
             this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -288,19 +277,21 @@
             // 
             this.tcpClientConnectedEventArgsBindingSource.DataSource = typeof(Cowboy.Sockets.TcpClientConnectedEventArgs);
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 5000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // speed
+            // 
+            this.speed.Name = "speed";
+            this.speed.Size = new System.Drawing.Size(84, 20);
+            this.speed.Text = "传输速度：";
+            // 
             // settingsBindingSource
             // 
             this.settingsBindingSource.DataSource = typeof(数据采集服务.Settings);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(29, 28);
-            this.toolStripButton6.Text = "可视化";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // MainForm
             // 
@@ -315,6 +306,7 @@
             this.Name = "MainForm";
             this.Text = "服务器";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -335,14 +327,11 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel RemotePort;
-        private System.Windows.Forms.ToolStripStatusLabel LocalPart;
         private System.Windows.Forms.ToolStripStatusLabel DataLength;
         private System.Windows.Forms.ToolStripStatusLabel AllDataLength;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox Status;
-        private System.Windows.Forms.ToolStripStatusLabel LocalEndPointAddress;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label IpAdress;
         private System.Windows.Forms.ToolStripSplitButton toolStripButton4;
@@ -356,6 +345,8 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ToolStripStatusLabel speed;
     }
 }
 

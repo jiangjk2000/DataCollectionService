@@ -24,6 +24,7 @@ namespace 数据采集服务
         /// </summary>
         double DataSum = 0;
         List<IPEndPoint> session = new List<IPEndPoint>();
+        List<double> list = new List<double>();
         private TcpSocketServer _server;
         public delegate void TcpConnect(TcpClientConnectedEventArgs e);
         #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
@@ -31,7 +32,7 @@ namespace 数据采集服务
         string header = "y,m,d,h,m,s,x0,x1,x2,x3,x4,x5,x6,x7,x8,x9".Trim();
         string dir = Application.StartupPath + "\\Data";
         ColumnHeader ch;
-
+        bool IfAdd = false;
         /// <summary>
         /// 默认窗体初始化
         /// </summary>
@@ -47,9 +48,24 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            ch = new ColumnHeader();
+            listView1.Columns.Add("IP", 120, HorizontalAlignment.Left);
+            listView1.Columns.Add("Port", 120, HorizontalAlignment.Left);
         }
-        
+        public void update_session()
+        {
+            this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度
+
+            for (int i = 0; i < session.Count; i++)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = session[i].Address.ToString();
+                lvi.SubItems.Add(session[i].Port.ToString());
+                this.listView1.Items.Add(lvi);
+            }
+
+            this.listView1.EndUpdate();  //结束数据处理，UI界面一次性绘制。
+        }
         #region 菜单
         /// <summary>
         /// 启动服务方法
@@ -152,23 +168,11 @@ namespace 数据采集服务
             if(!session.Contains(e.Session.RemoteEndPoint))
             {
                 session.Add(e.Session.RemoteEndPoint);
+                this.listView1.Items.Clear();
+                IfAdd = true;
             }
-            TcpConnect connect = new TcpConnect(Func);
-            //connect.Invoke(e);
-            ch = new ColumnHeader();
-            listView1.Columns.Add("IP", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("Port", 120, HorizontalAlignment.Left);
-            listView1.Items.Add("1");
-
-            toolStripStatusLabel1.Text = "已连接"+e.Session.RemoteEndPoint;
-            RemotePort.Text = "远程终结点为：" + e.Session.RemoteEndPoint.Port.ToString();
-            LocalPart.Text = "本地终结点"+e.Session.LocalEndPoint.Port.ToString();
-            LocalEndPointAddress.Text = "本地端口号："+e.Session.LocalEndPoint.Address.ToString();
+            toolStripStatusLabel1.Text = "已连接";
         }   
-        private void Func(TcpClientConnectedEventArgs e)
-        {
-            
-        }
         /// <summary>
         /// 服务端与客户端连接断开方法
         /// </summary>
@@ -177,6 +181,12 @@ namespace 数据采集服务
         void server_ClientDisconnected(object sender, TcpClientDisconnectedEventArgs e)
         {
             session.Remove(e.Session.RemoteEndPoint);
+            //listView1.Items.Remove();   //按项移除
+            IfAdd = true;
+            if (session.Count == 0)
+            {
+                toolStripStatusLabel1.Text = "就绪";
+            }
             Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 关闭连接"));
         }
         /// <summary>
@@ -193,6 +203,7 @@ namespace 数据采集服务
             DataLength.Text = "实时接收数据的量:"+e.DataLength.ToString();
             DataSum += e.DataLength;
             AllDataLength.Text = "接受数据的总量为：" + DataSum.ToString();
+            list.Add(e.DataLength);
         }
         /// <summary>
         /// 数据接收
@@ -245,13 +256,11 @@ namespace 数据采集服务
                 Directory.CreateDirectory(dir);
             }
             string filepath = dir + "\\" + date.ToString("yyyy-MM-dd") + ".csv";
-
-
             return filepath;
         }
         #endregion
 
-        #region 连接状态
+        #region 速度及连接状态
         /// <summary>
         /// 连接状态更新计时器方法
         /// </summary>
@@ -259,17 +268,30 @@ namespace 数据采集服务
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            IpAdress.Text = "已有以下已连接，共"+session.Count.ToString()+"个\n";
+            string x = "";
             foreach (var item in session)
             {
-                IpAdress.Text += item;
+                x += item;
+                x += "\n";
             }
-            this.listView1.BeginUpdate();
-            foreach (var item in session)
+            IpAdress.Text = "已有以下已连接，共" + session.Count.ToString() + "个\n" + x;
+            if (IfAdd)
             {
-                ListViewItem lvi = new ListViewItem();
-                //lvi.Text = 
+                update_session();
+
             }
+            IfAdd = false;
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            double sum = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                sum += list[i];
+
+            }
+            speed.Text = "速度为:" + (sum / 5).ToString() + "b/s";
+            list.Clear();
         }
         #endregion
 
@@ -357,20 +379,43 @@ namespace 数据采集服务
         private void 服务器_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
         }
-
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                this.服务器.Visible = true;
+            }
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
         #endregion
 
+        #region 实时与历史数据窗口
+        /// <summary>
+        /// 打开窗口Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             DataForm dataForm = new DataForm();
             dataForm.ShowDialog();
         }
+        #endregion
 
+        #region ZedGraph窗口
+        /// <summary>
+        /// 打开窗口Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             MatPlotForm matPlotForm = new MatPlotForm();
             matPlotForm.ShowDialog();
         }
+        #endregion
     }
 }
