@@ -19,8 +19,12 @@ namespace ConsoleApp1
             while (true)
             {
                 StringBuilder sb = new StringBuilder();
+<<<<<<< Updated upstream
                 sb.Append("Data>>#");
                 for (int i = 0; i < 9; i++)
+=======
+                for (int i = 0; i < 15; i++)
+>>>>>>> Stashed changes
                 {
                     sb.Append(m.Next(1024).ToString());
                     sb.Append(",");
