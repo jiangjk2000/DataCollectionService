@@ -437,7 +437,6 @@ namespace 数据采集服务
         /// <param name="dataLength"></param>
         private void UpdateGraph(byte[] data, int dataOffset, int dataLength)
         {
-<<<<<<< Updated upstream
             RealDataReceive(data, dataOffset, dataLength);
 
         }
@@ -458,11 +457,6 @@ namespace 数据采集服务
             }
             //MainForm.realdata = realdatatemp;
             return realdatatemp;
-=======
-            MatPlotForm matPlotForm = new MatPlotForm();
-            matPlotForm.ShowDialog();
-            
->>>>>>> Stashed changes
         }
         #endregion
     }
