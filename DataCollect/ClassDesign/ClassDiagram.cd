@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataCollect.MainForm" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="DataCollect.MainForm.TcpConnect" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\MainForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAyEAg0lADBAwAAgQEeCEX4CaoggZSggAHEAIIEBBAE=</HashCode>
+      <FileName>Forms\MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataCollect.DataVisualization">
+    <Position X="9.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\DataVisualization.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataCollect.DataDisplay">
+    <Position X="9.25" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\DataDisplay.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataCollect.Modules.ListViewNF" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <AssociationLine Name="MainForm" Type="DataCollect.MainForm" ManuallyRouted="true">
+      <Path>
+        <Point X="6.25" Y="3.25" />
+        <Point X="6.25" Y="2.677" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Modules\ListViewNF.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MainForm" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

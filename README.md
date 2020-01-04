@@ -17,6 +17,10 @@ https://www.cnblogs.com/lvdongjie/p/6963799.html
 - Cowboy 开源 WebSocket 网络库
 https://www.cnblogs.com/gaochundong/p/cowboy_websockets.html
 
+- 深入浅出UML类图
+https://www.runoob.com/design-pattern/design-pattern-intro.html
+http://www.uml.org.cn/oobject/201211231.asp
+
 ## 实现目标
 1. 设置界面 
 	- 服务器IP、端口号
