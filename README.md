@@ -1,6 +1,14 @@
 # Data Collection Service
 C# TCP服务 Cowboy 开源 WebSocket 网络库
+![languages icon](https://img.shields.io/github/languages/top/jiangjk2000/DataCollectionService)
+![release icon](https://img.shields.io/github/v/release/jiangjk2000/DataCollectionService)
 
+last commit
+![commit icon](https://img.shields.io/github/last-commit/jiangjk2000/DataCollectionService)
+
+branch last commit
+![Zedcommit icon](https://img.shields.io/github/last-commit/jiangjk2000/DataCollectionService/ZedGraph-Develop "ZedGraph-Develop")
+![ListViewcommit icon](https://img.shields.io/github/last-commit/jiangjk2000/DataCollectionService/ListView-Develop "ListView-Develop")
 ## 所需第三方类库
 1. NuGets
 	- Nlog
