@@ -1,14 +1,23 @@
 # Data Collection Service
-
 C# TCP服务 Cowboy 开源 WebSocket 网络库
 
-参考文档
+## 所需第三方类库
+1. NuGets
+	- Nlog
+	- ZedGraph
+	- Costura.Fody
+2. 类库
+	- Cowboy.Sockets https://github.com/gaochundong/Cowboy
+	- CSkin http://www.cskin.net/
+
+## 参考文档
 - C# 高性能 TCP 服务的多种实现方式Cowboy.Sockets
 https://www.cnblogs.com/lvdongjie/p/6963799.html
 
 - Cowboy 开源 WebSocket 网络库
 https://www.cnblogs.com/gaochundong/p/cowboy_websockets.html
 
+## 实现目标
 1. 设置界面 
 	- 服务器IP、端口号
 	- 接收数据存储路径、文件名格式
