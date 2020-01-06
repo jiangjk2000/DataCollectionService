@@ -118,6 +118,8 @@
     <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\MainFormLogs.cs" />
+    <Compile Include="Modules\TCPServer.cs" />
     <Compile Include="Properties\MainSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

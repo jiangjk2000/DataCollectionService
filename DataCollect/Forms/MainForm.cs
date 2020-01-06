@@ -24,12 +24,12 @@ namespace DataCollect
         List<double> list = new List<double>();
         private TcpSocketServer _server;
         public delegate void TcpConnect(TcpClientConnectedEventArgs e);
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         public int port = 22222;
         string header = "y,m,d,h,m,s,x0,x1,x2,x3,x4,x5,x6,x7,x8,x9".Trim();
         string dir = Application.StartupPath + "\\Data";
-
+        MainFormLogs formLogs = new MainFormLogs();
         bool IfAdd = false;
+
         /// <summary>
         /// 默认窗体初始化
         /// </summary>
@@ -84,7 +84,7 @@ namespace DataCollect
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            Log("启动服务");
+            formLogs.Log("启动服务", Status);
 
             StartServer(port);
             toolStripButton2.Enabled = true;
@@ -97,7 +97,7 @@ namespace DataCollect
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            Log("关闭服务");
+            formLogs.Log("关闭服务", Status);
             StopServer();
             toolStripButton2.Enabled = false;
             toolStripButton1.Enabled = true;
@@ -114,29 +114,6 @@ namespace DataCollect
                 Directory.CreateDirectory(dir);
             }
             System.Diagnostics.Process.Start(dir);
-        }
-        #endregion
-
-        #region 日志
-        /// <summary>
-        /// 生成日志
-        /// </summary>
-        /// <param name="msg"></param>
-        private void Log(string msg)
-        {
-            Status.Invoke(new Action(() => LogImplement(msg)));
-        }
-        /// <summary>
-        /// 生成日志工具方法
-        /// </summary>
-        /// <param name="msg"></param>
-        private void LogImplement(string msg)
-        {
-            Status.AppendText(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss  ") + msg + "\r\n");
-            if (Status.Text.Length > 5000)
-            {
-                Status.Text = Status.Text.Substring(4000);
-            }
         }
         #endregion
 
@@ -174,7 +151,7 @@ namespace DataCollect
         /// <param name="e"></param>
         void server_ClientConnected(object sender, TcpClientConnectedEventArgs e)
         {
-            Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 接入服务器"));
+            formLogs.Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 接入服务器"), Status);
             if (!session.Contains(e.Session.RemoteEndPoint))
             {
                 session.Add(e.Session.RemoteEndPoint);
@@ -197,7 +174,7 @@ namespace DataCollect
             {
                 toolStripStatusLabel1.Text = "就绪";
             }
-            Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 关闭连接"));
+            formLogs.Log(string.Format(e.Session.RemoteEndPoint.Address + ">> 关闭连接"), Status);
         }
         /// <summary>
         /// 服务端数据接收方法
@@ -207,7 +184,7 @@ namespace DataCollect
         void server_ClientDataReceived(object sender, TcpClientDataReceivedEventArgs e)
         {
 
-            Log(e.Session.RemoteEndPoint.Address + ">> 收到" + e.DataLength + "字节数据");
+            formLogs.Log(e.Session.RemoteEndPoint.Address + ">> 收到" + e.DataLength + "字节数据", Status);
             string filepath = GetDataFilePath(e.Session.RemoteEndPoint.Address);
             WriteData(filepath, e.Data, e.DataOffset, e.DataLength);
             UpdateGraph(e.Data, e.DataOffset, e.DataLength);
@@ -386,11 +363,6 @@ namespace DataCollect
         {
             toolTip1.Show("显示接受字节数量", Status);
         }
-        /// <summary>
-        /// 显示连接状态
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         #endregion
 
         #region 后台最小化

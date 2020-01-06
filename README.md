@@ -11,9 +11,9 @@ branch last commit
 ![ListViewcommit icon](https://img.shields.io/github/last-commit/jiangjk2000/DataCollectionService/ListView-Develop "ListView-Develop")
 ## 所需第三方类库
 1. NuGets
-	- Nlog
-	- ZedGraph
-	- Costura.Fody
+	- Nlog https://www.nuget.org/packages/NLog/
+	- ZedGraph https://www.nuget.org/packages/ZedGraph/6.0.0-alpha0001
+	- Costura.Fody https://www.nuget.org/packages/Costura.Fody/
 2. 类库
 	- Cowboy.Sockets https://github.com/gaochundong/Cowboy
 	- CSkin http://www.cskin.net/
@@ -29,29 +29,30 @@ https://www.cnblogs.com/gaochundong/p/cowboy_websockets.html
 https://www.runoob.com/design-pattern/design-pattern-intro.html
 http://www.uml.org.cn/oobject/201211231.asp
 
+- ZedGraph Demo
+https://sourceforge.net/projects/zedgraph/
+
 ## 实现目标
 1. 设置界面 
-	- 服务器IP、端口号
-	- 接收数据存储路径、文件名格式
+	- ~~服务器IP、端口号~~
+	- ~~接收数据存储路径、文件名格式~~
 
 2. 状态栏
-	- 显示统计数据：接收,发送数据的量与速度,连接数
-	- 显示服务器状态
+	- ~~显示统计数据：接收,发送数据的量与速度,连接数~~
+	- ~~显示服务器状态~~
 
 3. 查看当前接入的客户端
-	- IP地址、端口号
+	- ~~IP地址、端口号~~
 
 4. 关于对话框
-	- 软件信息
+	- ~~软件信息~~
 	- 版权信息
 
 5. 界面设计
-	- 图标
-	- 配色
-	- 布局
+	- ~~图标,配色,布局~~
 
 6. 查看接收数据
-	- 实时数据
+	- ~~实时数据~~
 	- 历史数据
 
 7. 接收数据的描述、分析、提取、绘图
